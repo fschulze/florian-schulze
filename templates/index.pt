@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>${request.registry.settings['config']['site']['title']}</title>
+    <link href="${request.static_path('static/style.css')}" rel="stylesheet">
+</head>
+<body>
+    <div id="contentwrapper">
+        <div id="content">
+            <h1>${request.registry.settings['config']['site']['title']}</h1>
+        </div>
+    </div>
+</body>
+</html>

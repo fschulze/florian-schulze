@@ -1,0 +1,26 @@
+html, body {
+    margin: 0;
+    padding: 1em 1em;
+    font-family: Georgia, "Times New Roman", Times, serif;
+}
+body {
+    background: #2d0000 url(royal-red-dark.gif);
+    font-family: serif;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-style: italic;
+}
+#contentwrapper {
+    margin: 0 auto;
+    max-width: 60em;
+    background: #fcf6d6 url(paper.gif);
+    box-shadow: 0px 0px 80px 40px rgba(0, 0, 20, 0.7);
+}
+#content {
+    margin: 0;
+    padding: 1em;
+    min-height: 20em;
+    box-shadow: inset 0px 0px 80px 20px rgba(70, 30, 0, 0.5);
+    border: 1px solid rgb(120, 100, 0);
+    /*border: 3px solid rgb(180, 150, 0);*/
+}

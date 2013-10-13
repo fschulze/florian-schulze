@@ -1,0 +1,46 @@
+A different fridge to store your eggs
+#####################################
+:date: 2009-02-12 16:32
+:author: Fschulze42
+:category: Development, Plone
+
+Today I wanted to release a new version of `ImageRepository`_. For quite
+some time now, I didn't update the product pages at `plone.org`_,
+because it was very time consuming and cumbersome. But recently
+plone.org was upgraded to a newer Plone version and the
+`PloneSoftwareCenter`_ was updated to a version which supports the
+`PyPI`_ API for egg uploads.
+
+.. raw:: html
+
+   </p>
+
+Python 2.6 contains updates which add the mupload and mregister commands
+to distutils. For older versions, which are still in common use in the
+Zope/Plone world, there is `collective.dist`_ which adds the same
+commands. After I followed the instructions to update my ~/.pypirc file,
+I tried to register. Unfortunately by default the egg name is normalized
+to "products-imagerepository", but the original location is named just
+"imagerepository". I was told by `David Glick`_ that there is a tab for
+distutils settings in the project edit page. After I set the primary
+distutils id to "Products.ImageRepository", the mregister command worked
+fine! Now I just had to remove the download\_url setting from setup.py,
+so there would be no external link created on each registration.
+
+.. raw:: html
+
+   </p>
+
+So, after all these steps I finally made a 0.9 release of
+ImageRepository and it was easily uploaded to both plone.org and PyPI.
+
+.. raw:: html
+
+   </p>
+
+.. _ImageRepository: http://plone.org/products/imagerepository
+.. _plone.org: http://plone.org/
+.. _PloneSoftwareCenter: http://plone.org/products/plonesoftwarecenter/
+.. _PyPI: http://pypi.python.org/
+.. _collective.dist: http://pypi.python.org/pypi/collective.dist
+.. _David Glick: http://david.wglick.org/

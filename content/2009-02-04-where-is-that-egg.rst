@@ -1,0 +1,43 @@
+Where is that egg?
+##################
+:date: 2009-02-04 15:56
+:author: Fschulze42
+:category: Development, Plone
+
+In the `Zope`_/`Plone`_ world working with `zc.buildout`_ is the norm
+nowadays. Many people use an egg cache for speed and disk space
+preservation. That way eggs aren't stored directly in your buildout
+anymore and it can by cumbersome to get there location from the
+commandline. One way to solve this is `collective.recipe.omelette`_ but
+that only exposes the paths for all eggs at once. I wrote a small shell
+function to solve that issue.
+
+.. raw:: html
+
+   <p>
+
+::
+
+    function eggpath() {        local name=$1;        shift;        local files=$*;        if [ -z $files ]; then                if [ -e ./bin/instance* ]; then                        local files="$files ./bin/instance*";                fi                if [ -e ./bin/client* ]; then                        local files="$files ./bin/client*";                fi        fi        grep -o -iE "/.*$name.*.egg" $files | sort -u;}
+
+.. raw:: html
+
+   </p>
+
+With this you can get the path of an egg from any script. First argument
+is a regexp which is used for matching the name, most of the time this
+is a simple string with a part of the egg name. Optionally you can
+provide the name of the script(s) which should be checked, if it's not
+given the function will look for bin/instance\* or bin/client\* scripts
+by default, which are the most common names for the Zope scripts in
+Plone buildouts.
+
+My most common use case for this is for opening the egg with my editor
+like this: ``mate `eggpath some.egg```.
+
+I hope this is useful for other people as well.
+
+.. _Zope: http://zope.org
+.. _Plone: http://plone.org
+.. _zc.buildout: http://pypi.python.org/pypi/zc.buildout
+.. _collective.recipe.omelette: http://pypi.python.org/pypi/collective.recipe.omelette
