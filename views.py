@@ -29,7 +29,7 @@ class ArchiveView(object):
         items = []
         for ob in self.context.items:
             items.append(dict(
-                title=ob.title))
+                title=ob['title']))
         return items
 
     @view_config(

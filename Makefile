@@ -9,4 +9,5 @@ bin/python:
 bin/stasis: bin/python
 	bin/pip install docutils
 	bin/pip install pyramid_chameleon
-	bin/pip install stasis
+	bin/pip install sqlalchemy
+	bin/pip install stasis>=0.3
