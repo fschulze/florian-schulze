@@ -1,14 +1,6 @@
-from pprint import pprint
-from pyramid.compat import escape
+from operator import itemgetter
+from factories import normalize_string
 from pyramid.view import view_config
-import os
-
-
-@view_config(
-    route_name='index',
-    renderer='templates/index.pt')
-def index_view(context, request):
-    return dict()
 
 
 @view_config(
@@ -28,9 +20,26 @@ class ArchiveView(object):
     def items(self):
         items = []
         for ob in self.context.items:
+            date = ob['date'].value
+            url = self.request.relroute_path(
+                'post',
+                year=date.year,
+                month="%02d" % date.month,
+                day="%02d" % date.day,
+                name=normalize_string(ob['title'].value))
             items.append(dict(
-                title=ob['title']))
-        return items
+                date=date,
+                title=ob['title'].value,
+                body=ob['body'].value,
+                url=url))
+        return sorted(items, key=itemgetter('date'), reverse=True)
+
+    @view_config(
+        route_name='index',
+        renderer='templates/index.pt')
+    def index_view(self):
+        return dict(
+            items=self.items()[:5])
 
     @view_config(
         route_name='yearlyarchive',

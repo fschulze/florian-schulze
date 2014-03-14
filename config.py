@@ -20,7 +20,8 @@ config.add_filesystem_walker('posts', 'content')
 config.add_static_view('static', 'static')
 config.add_route(
     'index',
-    pattern='/index.html')
+    pattern='/index.html',
+    factory='__main__.factories.Archive')
 config.add_route(
     'yearlyarchive',
     pattern='/{year}/index.html',

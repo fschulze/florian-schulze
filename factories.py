@@ -34,10 +34,11 @@ class Archive(object):
         self.items = [
             entries[x] for x in entries
             if key.issubset(x)]
-        self.date = datetime.date(
-            int(request.matchdict.get('year')),
-            int(request.matchdict.get('month', 1)),
-            int(request.matchdict.get('day', 1)))
+        if request.matchdict:
+            self.date = datetime.date(
+                int(request.matchdict.get('year')),
+                int(request.matchdict.get('month', 1)),
+                int(request.matchdict.get('day', 1)))
 
     @classmethod
     def matches(cls, registry):
@@ -48,8 +49,8 @@ class Post(object):
     def __init__(self, request):
         entries = blog_entries(request.registry)
         entry = entries[frozenset(request.matchdict.items())]
-        self.title = entry['title']
-        self.body = entry['body']
+        self.title = entry['title'].value
+        self.body = entry['body'].value
 
     @classmethod
     def matches(cls, registry):

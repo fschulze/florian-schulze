@@ -9,6 +9,10 @@
     <div id="contentwrapper">
         <div id="content">
             <h1>${request.registry['siteconfig']['site']['title']}</h1>
+            <tal:posts repeat="item items">
+                <h1><a href="${item.url}">${item.title}</a></h1>
+                <tal:body replace="structure item.body" />
+            </tal:posts>
         </div>
     </div>
 </body>

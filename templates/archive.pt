@@ -9,7 +9,9 @@
     <div id="contentwrapper">
         <div id="content">
             <h1>${title}</h1>
-            <div tal:replace="items" />
+            <tal:posts repeat="item items">
+                <h1><a href="${item.url}">${item.title}</a></h1>
+            </tal:posts>
         </div>
     </div>
 </body>

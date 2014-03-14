@@ -1,13 +1,13 @@
 html, body {
     margin: 0;
     padding: 1em 1em;
-    font-family: Georgia, "Times New Roman", Times, serif;
+    font-family: "Georgia", "Palatino", 'Palatino Linotype', serif;
 }
 body {
     background: #2d0000 url(royal-red-dark.gif);
-    font-family: serif;
 }
 h1, h2, h3, h4, h5, h6 {
+    font-family: "Georgia", "Palatino", 'Palatino Linotype', serif;
     font-style: italic;
 }
 #contentwrapper {
