@@ -1,13 +1,13 @@
 virtualenv = virtualenv
 
-all: bin/stasis
+all: .installed.cfg
 
 bin/python:
 	$(virtualenv) --system-site-packages --clear .
 	-clear-setuptools-dependency-links
 
-bin/stasis: bin/python
-	bin/pip install docutils
-	bin/pip install pyramid_chameleon
-	bin/pip install sqlalchemy
-	bin/pip install stasis>=0.3
+bin/buildout: bin/python
+	bin/pip install zc.buildout
+
+.installed.cfg: bin/buildout buildout.cfg
+	bin/buildout -v

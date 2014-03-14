@@ -12,15 +12,16 @@ def normalize_string(s):
 
 
 def blog_entries(registry):
-    entities = registry['entities'].query('date', 'title', 'body', walker='posts')
+    a = registry['entities'].aspects
+    entities = registry['entities'].query('date', 'title', 'body', a.walker.name=='posts')
     entries = {}
     for entity in entities:
-        date = entity['date'].date()
+        date = entity.date.value.date()
         key = frozenset(dict(
             year=unicode(date.year),
             month=u"%02i" % date.month,
             day=u"%02i" % date.day,
-            name=normalize_string(entity['title'])).items())
+            name=normalize_string(entity.title.value)).items())
         entries[key] = entity
     return entries
 
@@ -41,6 +42,7 @@ class Archive(object):
     @classmethod
     def matches(cls, registry):
         return [dict(x) for x in blog_entries(registry).keys()]
+
 
 class Post(object):
     def __init__(self, request):
