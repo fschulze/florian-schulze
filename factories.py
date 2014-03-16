@@ -13,7 +13,7 @@ def normalize_string(s):
 
 def blog_entries(registry):
     a = registry['entities'].aspects
-    entities = registry['entities'].query('date', 'title', 'body', a.walker.name=='posts')
+    entities = registry['entities'].query(u'date', u'title', u'body', a.walker.name==u'posts')
     entries = {}
     for entity in entities:
         date = entity.date.value.date()
