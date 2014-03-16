@@ -1,4 +1,10 @@
+/.installed.cfg
+/.mr.developer.cfg
+/*.sublime-*
 /bin/
+/develop-eggs/
 /include/
 /lib/
 /output/
+/src/libstasis
+/src/stasis
