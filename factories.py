@@ -1,3 +1,4 @@
+from propdict import propdict
 import datetime
 import re
 import unicodedata
@@ -45,12 +46,11 @@ class Archive(object):
         return [dict(x) for x in blog_entries(registry).keys()]
 
 
-class Post(object):
+class Post(propdict):
     def __init__(self, request):
         entries = blog_entries(request.registry)
         entry = entries[frozenset(request.matchdict.items())]
-        self.title = entry['title'].value
-        self.body = entry['body'].value
+        self.update(entry)
 
     @classmethod
     def matches(cls, registry):

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html metal:define-macro="master">
+<head>
+    <meta charset="utf-8">
+    <title>${request.registry['siteconfig']['site']['title']}</title>
+    <link href="${request.static_path('static/style.css')}" rel="stylesheet">
+</head>
+<body>
+    <div class="contentwrapper">
+        <header>
+            <h1 class="sitetitle">${request.registry['siteconfig']['site']['title']}</h1>
+        </header>
+        <section class="side">
+            <nav>
+                <ul>
+                    <li>1</li>
+                    <li>2</li>
+                    <li>3</li>
+                </ul>
+            </nav>
+        </section>
+        <main class="content" role="main">
+            <metal:content define-slot="content" />
+        </main>
+        <footer>
+            <p>http://www.greatvectors.com/2012/06/vintage-calligraphic-decorations/</p>
+        </footer>
+    </div>
+</body>
+</html>

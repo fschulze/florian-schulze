@@ -1,0 +1,10 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <article metal:define-macro="post">
+            <header><h1><metal:title define-slot="title" /></h1></header>
+            <metal:body define-slot="body" />
+            <footer><metal:footer define-slot="footer" /></footer>
+        </article>
+    </body>
+</html>

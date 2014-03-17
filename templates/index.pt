@@ -1,19 +1,12 @@
 <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>${request.registry['siteconfig']['site']['title']}</title>
-    <link href="${request.static_path('static/style.css')}" rel="stylesheet">
-</head>
+<html metal:use-macro="master">
 <body>
-    <div id="contentwrapper">
-        <div id="content">
-            <h1>${request.registry['siteconfig']['site']['title']}</h1>
-            <tal:posts repeat="item items">
-                <h1><a href="${item.url}">${item.title}</a></h1>
-                <tal:body replace="structure item.body" />
-            </tal:posts>
-        </div>
-    </div>
+    <section metal:fill-slot="content">
+        <article metal:use-macro="macros.post" tal:repeat="item items">
+            <a metal:fill-slot="title" href="${item.url}">${item.title}</a>
+            <metal:body fill-slot="body" tal:replace="structure item.body" />
+            <metal:footer fill-slot="footer">Footer</metal:footer>
+        </article>
+    </section>
 </body>
 </html>
