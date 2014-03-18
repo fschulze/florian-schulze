@@ -8,7 +8,7 @@
 <body>
     <div class="contentwrapper">
         <header>
-            <h1 class="sitetitle">${request.registry['siteconfig']['site']['title']}</h1>
+            <h1 class="sitetitle"><a href="${request.relroute_path('index')}">${request.registry['siteconfig']['site']['title']}</a></h1>
         </header>
         <section class="side">
             <nav tal:replace="structure request.viewlets.archive">
