@@ -1,5 +1,6 @@
 from libstasis.entities import Column, types
 from stasis import Configurator
+from stasis.viewlet import Viewlets
 
 
 config = Configurator()
@@ -7,6 +8,7 @@ config.include('pyramid_chameleon')
 config.include('libstasis.entities')
 config.include('libstasis.walker')
 config.include('libstasis.rst')
+config.include('stasis.viewlet')
 config.add_entity_aspect(
     'title',
     Column('value', types.Unicode))
@@ -18,6 +20,7 @@ config.add_entity_aspect(
     Column('value', types.Unicode))
 config.add_filesystem_walker('posts', 'content')
 config.add_static_view('static', 'static')
+config.add_request_method(Viewlets, 'viewlets', property=True)
 config.add_route(
     'index',
     pattern='/index.html',

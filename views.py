@@ -1,6 +1,9 @@
+from babel.core import Locale
 from operator import itemgetter
 from factories import normalize_string
+from pyramid.i18n import get_locale_name
 from pyramid.view import view_config
+from stasis.viewlet import viewlet_config
 
 
 def get_post_info(post, request):
@@ -67,3 +70,28 @@ class ArchiveView(object):
         return dict(
             title=self.context.date.strftime("%Y-%m-%d"),
             items=self.items())
+
+    @viewlet_config(
+        'archive',
+        factory='__main__.factories.Posts',
+        renderer='templates/viewlets/archive.pt')
+    def archive_viewlet(self):
+        locale = Locale(get_locale_name(self.request))
+        months = dict()
+        for item in self.context.items.values():
+            date = item.date.value
+            key = (date.year, date.month)
+            months[key] = months.get(key, 0) + 1
+        items = []
+        for year, month in sorted(months.keys(), reverse=True):
+            count = months[(year, month)]
+            url = self.request.relroute_path(
+                'monthlyarchive',
+                month="%02d" % month,
+                year=year)
+            items.append(dict(
+                year=year,
+                month=locale.months['stand-alone']['wide'][month],
+                count=count,
+                url=url))
+        return dict(items=items)

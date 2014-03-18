@@ -11,7 +11,7 @@
             <h1 class="sitetitle">${request.registry['siteconfig']['site']['title']}</h1>
         </header>
         <section class="side">
-            <nav>
+            <nav tal:replace="structure request.viewlets.archive">
                 <ul>
                     <li>1</li>
                     <li>2</li>

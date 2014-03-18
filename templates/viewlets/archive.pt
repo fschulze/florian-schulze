@@ -1,0 +1,8 @@
+<nav>
+    <label>Archive</label>
+    <ul>
+        <li tal:repeat="item items">
+            <a href="${item.url}">${item.month} ${item.year}</a> (${item.count})
+        </li>
+    </ul>
+</nav>

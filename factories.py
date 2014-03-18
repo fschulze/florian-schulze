@@ -27,7 +27,17 @@ def blog_entries(registry):
     return entries
 
 
-class Archive(object):
+class Posts(object):
+    def __init__(self, request):
+        self.request = request
+        self.items = blog_entries(request.registry)
+
+    @classmethod
+    def matches(cls, registry):
+        return [dict(x) for x in blog_entries(registry).keys()]
+
+
+class Archive(Posts):
     def __init__(self, request):
         self.request = request
         key = set(request.matchdict.items())
@@ -41,17 +51,9 @@ class Archive(object):
                 int(request.matchdict.get('month', 1)),
                 int(request.matchdict.get('day', 1)))
 
-    @classmethod
-    def matches(cls, registry):
-        return [dict(x) for x in blog_entries(registry).keys()]
 
-
-class Post(propdict):
+class Post(Posts, propdict):
     def __init__(self, request):
         entries = blog_entries(request.registry)
         entry = entries[frozenset(request.matchdict.items())]
         self.update(entry)
-
-    @classmethod
-    def matches(cls, registry):
-        return [dict(x) for x in blog_entries(registry).keys()]
