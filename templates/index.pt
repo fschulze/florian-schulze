@@ -2,10 +2,7 @@
 <html metal:use-macro="master">
 <body>
     <section metal:fill-slot="content">
-        <article metal:use-macro="macros.post" tal:repeat="item items">
-            <a metal:fill-slot="title" href="${item.url}">${item.title}</a>
-            <metal:body fill-slot="body" tal:replace="structure item.body" />
-            <metal:footer fill-slot="footer">Footer</metal:footer>
+        <article metal:use-macro="macros.post" tal:repeat="post items">
         </article>
     </section>
 </body>

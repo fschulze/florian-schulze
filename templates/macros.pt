@@ -2,9 +2,9 @@
 <html>
     <body>
         <article metal:define-macro="post">
-            <header><h1><metal:title define-slot="title" /></h1></header>
-            <metal:body define-slot="body" />
-            <footer><metal:footer define-slot="footer" /></footer>
+            <header><h1><a href="${post.url}">${post.title}</a></h1></header>
+            <metal:body tal:replace="structure post.body" />
+            <footer>Published on ${post.formatted_date}</footer>
         </article>
     </body>
 </html>

@@ -1,12 +1,16 @@
 from babel.core import Locale
+from babel.support import Format
 from operator import itemgetter
 from factories import normalize_string
 from pyramid.i18n import get_locale_name
 from pyramid.view import view_config
 from stasis.viewlet import viewlet_config
+import pytz
 
 
 def get_post_info(post, request):
+    locale = Locale(get_locale_name(request))
+    formatter = Format(locale, pytz.utc)
     date = post['date'].value
     url = request.relroute_path(
         'post',
@@ -16,6 +20,7 @@ def get_post_info(post, request):
         name=normalize_string(post['title'].value))
     return dict(
         date=date,
+        formatted_date=formatter.datetime(date, format='full'),
         title=post['title'].value,
         url=url,
         body=post['body'].value)
@@ -25,7 +30,7 @@ def get_post_info(post, request):
     route_name='post',
     renderer='templates/post.pt')
 def post_view(context, request):
-    return get_post_info(context, request)
+    return dict(post=get_post_info(context, request))
 
 
 class ArchiveView(object):

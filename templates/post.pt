@@ -3,9 +3,6 @@
 <body>
     <section metal:fill-slot="content">
         <article metal:use-macro="macros.post">
-            <a metal:fill-slot="title" href="${url}">${title}</a>
-            <metal:body fill-slot="body" tal:replace="structure body" />
-            <metal:footer fill-slot="footer">Footer</metal:footer>
         </article>
     </section>
 </body>

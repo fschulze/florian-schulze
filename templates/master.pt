@@ -23,7 +23,7 @@
             <metal:content define-slot="content" />
         </main>
         <footer>
-            <p>http://www.greatvectors.com/2012/06/vintage-calligraphic-decorations/</p>
+            <p><a href="http://www.greatvectors.com/2012/06/vintage-calligraphic-decorations/">Calligraphic Decorations by http://www.greatvectors.com</a></p>
         </footer>
     </div>
 </body>
