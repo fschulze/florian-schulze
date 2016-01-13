@@ -1,0 +1,95 @@
+title: Speedboost with a SSD for my MacBook Pro
+---
+date: 2009-08-28 10:49:00+02:00
+---
+categories:
+
+Hardware
+---
+body:
+
+After reading a lot about SSDs and the speedup they can give to a
+computer, I decided to get one myself. A fellow developer `added a SSD
+to his late 2006 MacBook Pro`_, wrote about it and gave lots of tips.
+Since I have a late 2008 Unibody MacBook Pro, I had to get a slightly
+different `adapter to replace the SuperDrive with a HDD in the optical
+drive bay from NewmodeUS`_.
+
+At first I wanted to order the Intel X-25M 80GB in June for ~330 Euro.
+Shortly after ordering it, the supplier told me it would take 2 weeks to
+deliver. Due to an unexpected invoice I decided to cancel the order. I'm
+glad I did. I now got the next generation Intel X-25M 160GB *Postville*
+for ~400 Euro.
+
+Thanks to the `guides from iFixIt`_ and the new enclosures of the
+Unibody Macs, the replacement was quite easy.
+
+Some tips for the replacement:
+
+After removing the 8 screws of the bottom plate, lift it straight up and
+don't tilt it too much. There are latches on the left and right which
+open with slight force. If you tilt the bottom plate, then you may bend
+the ventilation grille at the back, or damage something with it. I don't
+think it's a real danger, just be careful.
+
+The black cable going above the SuperDrive to the back uses some
+adhesive, lift it off carefully.
+
+The plug of the black cable needs to be pulled out sideways, I used a
+knife, but better is to use something made of plastic. I pulled it off
+by pushing it sideways alternating on both sides.
+
+I had to leave off the upper half of the optical bay adapter or it
+wouldn't have fit.
+
+I only used one screw near the logic board to secure the adapter, since
+the SuperDrive has additional screw holes which aren't on the adapter.
+To compensate, I fitted something between subwoofer (the black plastic
+thing below the SuperDrive) and the adapter to keep it in place.
+
+At first I had replaced the HDD with the SSD and put the HDD in the
+optical bay adapter. That was a very tight fit and the HDD was much
+louder than before, because the noise goes through the DVD slot and the
+ventilation grille. I did this because I had read that the deep sleep
+mode doesn't work when using the drive in the optical bay as the boot
+drive. After a while I got really annoyed by the noise and I switched
+the HDD and SSD. **Unfortunately I can confirm that deep sleep doesn't
+work if the boot drive is in the optical bay!** For me it's the lesser
+evil though. Maybe Snow Leopard will fix this, I hope to know soon :)
+
+Once I had everything in place, I booted up the computer and held "Alt"
+after the startup sound to select the other disk as the boot device. I
+then used `SuperDuper!`_ to copy the OS from the HDD to the SSD (except
+for some large folders like "Music" and "Movies". After selecting the
+new drive as the startup drive in the system preferences, I rebooted ...
+
+I watched in awe while the system booted up in mere seconds, I logged in
+and all the icons in the menu bar warped in, the QuickSilver logo came
+and went in a second and the system was ready after about 30 seconds
+total since the restart!
+
+Other places I really notice the SSD speedup are the following:
+
+-  Mail.app starts up almost instantly and opening a folder with
+   thousands of mails is a breeze now.
+-  Opera (which I use for reading newsgroups) starts in just a few
+   seconds instead of churning along. Updating the newsgroups also takes
+   a fraction of the time before and is mostly limited by the internet
+   connection now.
+-  Searching with Spotlight is much faster, especially in Mail.app,
+   where I sometimes don't notice that *all* mails have been searched
+   instead of only the current folder.
+-  QuickSilver is much more responsive.
+-  Search in Project with TextMate is much better (but still not as fast
+   as ack on the HDD).
+-  Opening lots of images in iPhoto or Aperture is much faster
+-  In general I almost never experience short lags or delays anymore as
+   I did before.
+
+Oh and if the HDD goes to sleep the MBP is now *really* quiet, unless
+you run something CPU intensive and the fans go on :)
+
+.. _added a SSD to his late 2006 MacBook Pro: http://philikon.wordpress.com/2008/12/10/two-hard-drives-in-a-macbook-pro/
+.. _adapter to replace the SuperDrive with a HDD in the optical drive bay from NewmodeUS: http://newmodeus.com/shop/index.php?main_page=product_info&cPath=2_27&products_id=220
+.. _guides from iFixIt: http://www.ifixit.com/Guide/Device/MacBook_Pro_15%22_Unibody
+.. _SuperDuper!: http://www.shirt-pocket.com/SuperDuper/SuperDuperDescription.html

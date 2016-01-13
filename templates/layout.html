@@ -1,0 +1,42 @@
+<!doctype html>
+<meta charset="utf-8">
+<link rel="stylesheet" href="{{'/static/gen/styles.css'|asseturl }}">
+<script type=text/javascript src="{{'/static/gen/app.js'|asseturl }}" charset="utf-8"></script>
+<title>{% block title %}Welcome{% endblock %} — {{ config['PROJECT']['name'] }}</title>
+<body>
+  <div class="sitewrapper">
+    <header>
+      <h1><a href="{{ '/'|url }}">{{ config['PROJECT']['name'] }}</a></h1>
+    </header>
+<!--     <nav>
+      <ul class="nav navbar-nav">
+        <li{% if this._path == '/' %} class="active"{% endif
+          %}><a href="{{ '/'|url }}">Welcome</a></li>
+        {% for href, title in [
+          ['/blog', 'Blog'],
+        ] %}
+          <li{% if this.is_child_of(href) %} class="active"{% endif
+            %}><a href="{{ href|url }}">{{ title }}</a></li>
+        {% endfor %}
+      </ul>
+    </nav>
+ -->
+    <div class="pagewrapper">
+      <main class="page">
+        {% block body %}{% endblock %}
+      </main>
+      <aside class="sidebar">
+        <h2>Latest blog posts:</h2>
+        <dl>
+          {% for post in site.query('/blog').limit(5) %}
+            <dt><a href="{{ post|url }}">{{ post.title }}</a></dt>
+            <dd>published <span class="timestamp">{{ post.date|format_dt_utc }}</span></dd>
+          {% endfor %}
+        </dl>
+      </aside>
+    </div>
+    <footer>
+      &copy; Copyright 2016 by Florian Schulze
+    </footer>
+  </div>
+</body>

@@ -1,0 +1,22 @@
+title: Snakes on a cat!
+---
+date: 2009-11-05 10:31:00+01:00
+---
+categories:
+
+Development
+Plone
+---
+body:
+
+Since I started to `tame the snakepit`_, I made many improvements to
+make it even less scary.
+
+The `python buildout`_ now auto detects the platform you are on, so it
+works for many more systems then just Mac OS X without a custom
+configuration. On Mac OS X it automatically detects whether you are on
+Leopard or Snow Leopard. Since today it also works on Snow Leopard with
+32bit CPUs.
+
+.. _tame the snakepit: http://blog.crowproductions.de/2008/12/14/a-buildout-to-tame-the-snake-pit/
+.. _python buildout: https://svn.plone.org/svn/collective/buildout/python
