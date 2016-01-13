@@ -1,5 +1,7 @@
 [project]
 name = Florian's rambling place
+url = https://www.florian-schulze.net
 
 [packages]
 lektor-webpack-support = 0.1
+lektor-atom = 0.1

@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from lektor.pluginsystem import Plugin
 from lektor.types import Type
+import datetime
 import dateutil.parser
 
 
@@ -18,5 +19,10 @@ class FlorianSchulzePlugin(Plugin):
     description = u'Add your description here.'
 
     def on_setup_env(self, **extra):
+        class fs_utils:
+            def strptime(self, raw):
+                return dateutil.parser.parse(raw, dayfirst=False, yearfirst=True)
+
         self.env.types['datetime'] = DatetimeType
         self.env.jinja_env.filters['format_dt_utc'] = format_dt_utc
+        self.env.jinja_env.globals['fs_utils'] = fs_utils()
