@@ -27,8 +27,8 @@ module.exports = {
       { test: /\.css$/,
         loader: ExtractTextPlugin.extract(
           'style-loader', 'css-loader') },
-      { test: /\.(woff2?|ttf|eot|svg)$/,
-        loader: 'url-loader?limit=10000' },
+      { test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'file' },
       { test: /\.(png|jpe?g|gif)(\?.*)?$/,
         loader: 'url-loader?limit=10000!image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}!image-maxsize?useImageMagick=true' }
     ]
