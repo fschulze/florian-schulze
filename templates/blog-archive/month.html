@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
-{% block title %}{{ this.date|dateformat('MMMM yyyy') }} Archive | The Transcript{% endblock %}
+{% block title %}{{ this.date|dateformat('MMMM yyyy') }} Archive{% endblock %}
 {% block body %}
-  <h1>The Transcript, {{ this.date|dateformat('MMMM yyyy') }}</h1>
+  <h1>Archive for {{ this.date|dateformat('MMMM yyyy') }}</h1>
   <p>
     <a href="{{ '..'|url }}">&laquo; Back to {{ this.year }}</a>
   <ul>
