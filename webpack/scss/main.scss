@@ -1,6 +1,9 @@
 @import "~normalize.css/normalize.css";
 @import "code.css";
 
+$OpenSansPath: "~open-sans-fontface/fonts";
+@import "~open-sans-fontface/open-sans.scss";
+
 $fa-font-path: "~font-awesome/fonts";
 @import "~font-awesome/scss/font-awesome.scss";
 
@@ -148,8 +151,8 @@ footer {
 
 aside.sidebar {
     > h2 {
-        font-size: 17px;
-        font-size: 1.7rem;
+        font-size: 19px;
+        font-size: 1.9rem;
         font-weight: 600;
     }
     > dl {
