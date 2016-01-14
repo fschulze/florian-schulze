@@ -128,7 +128,7 @@ class BlogMonthArchive(BlogArchive):
 
     @property
     def path(self):
-        return '%s@blog-archive/%s/%s' % (
+        return '%s@blog-archive/%s/%02d' % (
             self.record.path,
             self.year,
             self.month
@@ -144,7 +144,7 @@ class BlogMonthArchive(BlogArchive):
 
     def get_archive_url_path(self):
         return self.plugin.get_url_path('month_archive_prefix') + [
-            self.year, self.month]
+            self.year, "%02d" % self.month]
 
 
 class BlogArchiveBuildProgram(BuildProgram):
