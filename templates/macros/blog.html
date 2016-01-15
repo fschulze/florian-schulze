@@ -9,5 +9,6 @@
     published <span class="timestamp">{{ post.date|format_dt_utc }}</span>
   </p>
   {{ post.body }}
+  <div data-social-share-privacy="true" data-uri="{{ post|url(external=True) }}" data-title="{{ post.title }}"></div>
   </article>
 {% endmacro %}
