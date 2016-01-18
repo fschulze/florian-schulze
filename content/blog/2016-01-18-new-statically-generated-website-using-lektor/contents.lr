@@ -1,0 +1,21 @@
+title: New statically generated website using Lektor
+---
+date: 2016-01-18 12:40:00+01:00
+---
+categories:
+
+Development
+---
+body:
+
+After several years and multiple attempts, I finally have a website again.
+
+I tried quite a few static website generators, including starting my own, until I finally settled with the recently announced `Lektor`_.
+
+The main addition to Lektor is my reStructuredText plugin `lektor-rst`_.
+I had all the old content in rst already and I favour it over markdown.
+
+The source code for my website is available on GitHub at https://github.com/fschulze/florian-schulze.
+
+.. _Lektor: https://www.getlektor.com/
+.. _lektor-rst: https://github.com/fschulze/lektor-rst
