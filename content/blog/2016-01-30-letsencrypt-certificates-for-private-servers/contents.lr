@@ -1,0 +1,52 @@
+title: Let’s Encrypt certificates for private servers
+---
+date: 2016-01-30 11:38:00+01:00
+---
+categories:
+
+Development
+---
+body:
+
+At the end of January 2016 `Let's Encrypt`_ fixed the last bug which prevented `letsencrypt-remote`_ from authenticating via DNS.
+
+It is now possible to generate TLS certificates for private servers if you can delegate name resolution via your DNS provider.
+
+Let's say you want to generate a certificate for use on your Laptop.
+You first need to create a subdomain pointing to 127.0.0.1.
+Something like this in your zone for ``localhost.example.com``::
+
+    localhost  IN A  127.0.0.1
+
+Additionally you need to delegate ``_acme-challenge.localhost.example.com`` to an IP which is reachable by the Let's Encrypt servers and where you can access DNS port 53.
+For example your web server if you have one::
+
+    _acme-challenge.localhost  IN NS  www
+
+If you use your web server, you could use ssh to forward the port 8053 to your laptop::
+
+    $ ssh root@example.com -R 8053:localhost:8053
+
+You then need to use something to forward remote UDP packets from port 53 of the server to the forwarded TCP port 8053,
+for example ``socat``::
+
+    # socat -T15 udp4-recvfrom:53,reuseaddr,fork tcp:localhost:8053
+
+Now on your laptop you can use letsencrypt-remote to create a certificate using DNS::
+
+    % letsencrypt-remote --dns localhost.example.com
+
+If everything worked correctly:
+
+- letsencrypt-remote should have started a DNS server
+- requested certificate signing
+- the Let's Encrypt servers should be delegated to your server for the DNS query
+- the request be forwarded to your laptop
+- the answer sent back
+- and you got a signed certificate for ``localhost.example.com``
+
+This also works for other private ip ranges like ``10.0.0.0/8`` or ``192.168.1.0/24``.
+
+
+.. _Let's Encrypt: https://letsencrypt.org
+.. _letsencrypt-remote: https://pypi.python.org/pypi/letsencrypt-remote
