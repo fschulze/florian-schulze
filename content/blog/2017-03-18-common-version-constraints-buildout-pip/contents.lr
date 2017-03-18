@@ -1,0 +1,75 @@
+title: Common version constraints for buildout and pip
+---
+date: 2017-03-18 14:55:00+02:00
+---
+categories:
+
+Development
+---
+body:
+
+Recent releases of ``setuptools`` started to pull in requirements as packages.
+This caused issues when installing `zc.buildout`_ with pip in a virtualenv and there are packages installed which require one of those packages and there was a conflicting version pin.
+Namely this happened with ``pyparsing`` in my case.
+
+I wrote the following `buildout.extensionscripts`_ helper:
+
+.. code-block:: python
+
+    def getVersions(buildout):
+        from pip.req import parse_requirements
+        import os
+        import zc.buildout
+        fn = os.path.join(
+            buildout._raw['buildout']['directory'],
+            'version-constraints.txt')
+        constraints = parse_requirements(fn, constraint=True, session=object())
+        versions = buildout._raw['versions']
+
+        def set_version(constraint, spec):
+            if constraint.name in versions and versions[constraint.name] and versions[constraint.name] != spec:
+                buildout._error(
+                    "Version pin %s out of sync with [versions] %s = %s." % (
+                        constraint, constraint.name, versions[constraint.name]))
+            elif constraint.name in versions and not versions[constraint.name]:
+                buildout._logger.warn("Not setting version constraint for possible develop egg '%s'." % constraint.name)
+                return
+            versions[constraint.name] = spec
+
+        for constraint in constraints:
+            specs = set(spec._spec for spec in constraint.specifier._specs)
+            specs = sorted(specs)
+            if len(specs) == 1 and specs[0][0] == u'==':
+                set_version(constraint, specs[0][1])
+            else:
+                buildout._error("Don't know how to set %s in [versions]." % constraint)
+        zc.buildout.easy_install.default_versions(versions)
+
+This way there is one ``version-constraints.txt`` in the buildout root which I use with ``pip install -c version-constraints.txt -U setuptools`` during setup of the virtualenv.
+
+The ``versions.cfg`` file for buildout now looks like this:
+
+.. code-block:: ini
+
+    [buildout]
+    extension-scripts +=
+        ${buildout:directory}/src/buildout-utils.py:getVersions
+
+
+    [versions]
+    # mostly set by getVersions from version-constraints.txt
+    # but we need to pin buildout stuff that's used before getVersions is called
+
+    # Buildout infrastructure
+    buildout.extensionscripts = 1.0
+    zc.buildout = 2.5.3
+    zc.recipe.egg = 1.3.2
+    mr.developer = 1.38
+
+Currently only ``==`` version constraints are supported, but others are possible as well and just need to be added properly in ``[versions]``.
+
+If you use `mr.developer`_, then you need at least version 1.38 for a fix, otherwise ``develop`` packages won't be picked up.
+
+.. _zc.buildout: http://www.buildout.org/
+.. _buildout.extensionscripts: https://pypi.python.org/pypi/buildout.extensionscripts
+.. _mr.developer: https://pypi.python.org/pypi/mr.developer
