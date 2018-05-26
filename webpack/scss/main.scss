@@ -1,13 +1,5 @@
 @import "~normalize.css/normalize.css";
 @import "code.css";
-@import "../SocialSharePrivacy/stylesheets/common.css";
-@import "../SocialSharePrivacy/stylesheets/modules/buffer.css";
-@import "../SocialSharePrivacy/stylesheets/modules/facebook.css";
-@import "../SocialSharePrivacy/stylesheets/modules/linkedin.css";
-@import "../SocialSharePrivacy/stylesheets/modules/pinterest.css";
-@import "../SocialSharePrivacy/stylesheets/modules/reddit.css";
-@import "../SocialSharePrivacy/stylesheets/modules/tumblr.css";
-@import "../SocialSharePrivacy/stylesheets/modules/twitter.css";
 
 $OpenSansPath: "~open-sans-fontface/fonts";
 @import "~open-sans-fontface/open-sans.scss";
@@ -186,19 +178,6 @@ pre {
     font-size: 17px;
     font-size: 1.7rem;
     line-height: 1.25em;
-}
-
-.social_share_privacy_area.line {
-    height: inherit;
-
-    li {
-        height: 23px;
-        width: 200px;
-        &, .switch, .dummy_btn {
-            display: inline-block;
-            float: none;
-        }
-    }
 }
 
 @media (max-width: 1024px) {
