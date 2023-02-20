@@ -4,7 +4,7 @@
     "babel-core": "^6",
     "babel-loader": "^9",
     "css-loader": "^6",
-    "font-awesome": "^4",
+    "@fortawesome/fontawesome-free": "^5",
     "gm": "^1",
     "image-maxsize-webpack-loader": "^1",
     "image-webpack-loader": "^8",

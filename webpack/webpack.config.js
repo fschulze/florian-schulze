@@ -30,7 +30,10 @@ module.exports = {
         use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
       },
       { test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        type: 'asset/resource'
+        type: 'asset/resource',
+        generator: {
+          filename: 'compiled/fonts/[hash][ext][query]'
+        }
       },
       { test: /\.(png|jpe?g|gif)(\?.*)?$/i,
         type: 'asset',
