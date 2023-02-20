@@ -1,20 +1,16 @@
-var moment = require('moment-mini');
 require('normalize.css');
 
-$(function() {
-    moment.locale("en")
-    moment.locale("en", {
-        longDateFormat: {
-            LT: "HH:mm",
-            L: "YYYY-MM-DD"
+document.addEventListener("DOMContentLoaded", function(event) {
+    document.querySelectorAll('.timestamp').forEach(element => {
+        var time = new Date(element.textContent);
+        if (isNaN(time)) {
+            return;
         }
-    });
-    $('.timestamp').each(function() {
-        var element = $(this);
-        var time = moment.utc(element.text(), "YYYY-MM-DD HH:mm:ss");
-        if (time.isValid()) {
-            element.text(time.local().calendar());
-            element.attr("title", time.local().toISOString());
-        }
+        time = new Date(Date.UTC(
+            time.getFullYear(), time.getMonth(), time.getDate(),
+            time.getHours(), time.getMinutes(), time.getSeconds()));
+        var iso = time.toISOString();
+        element.textContent = iso.slice(0, 10);
+        element.setAttribute("title", iso);
     });
 });

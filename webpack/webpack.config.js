@@ -1,9 +1,11 @@
-var webpack = require('webpack');
-var path = require('path');
-var ExtractTextPlugin = require('extract-text-webpack-plugin');
+const webpack = require('webpack');
+const path = require('path');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 
 module.exports = {
+  mode: 'production',
   entry: {
     'app': './js/main.js',
     'styles': './scss/main.scss'
@@ -12,33 +14,67 @@ module.exports = {
     path: path.dirname(__dirname) + '/assets/static/gen',
     filename: '[name].js'
   },
-  devtool: '#cheap-module-source-map',
+  devtool: 'cheap-module-source-map',
   resolve: {
-    modulesDirectories: ['node_modules'],
+    modules: ['node_modules'],
     extensions: ['', '.js']
   },
   module: {
-    loaders: [
+    rules: [
       { test: /\.js$/, exclude: /node_modules/,
         loader: 'babel-loader' },
       { test: /\.scss$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader', 'css-loader!sass-loader') },
+        use: [ MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader' ]
+      },
       { test: /\.css$/,
-        loader: ExtractTextPlugin.extract(
-          'style-loader', 'css-loader') },
+        use: [ MiniCssExtractPlugin.loader, 'css-loader' ]
+      },
       { test: /\.(woff2?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
-        loader: 'file' },
-      { test: /\.(png|jpe?g|gif)(\?.*)?$/,
-        loader: 'url-loader?limit=10000!image-webpack?{progressive:true, optimizationLevel: 7, interlaced: false, pngquant:{quality: "65-90", speed: 4}}!image-maxsize?useImageMagick=true' }
+        type: 'asset/resource'
+      },
+      { test: /\.(png|jpe?g|gif)(\?.*)?$/i,
+        type: 'asset',
+        parser: {
+          dataUrlCondition: {
+            maxSize: 8 * 1024
+          }
+        },
+        use: [
+          {
+            loader: 'image-maxsize-webpack-loader',
+            options: {
+              useImageMagick: false
+            }
+          },
+          {
+            loader: 'image-webpack-loader',
+            options: {
+              mozjpeg: {
+                progressive:true
+              },
+              optipng: {
+                optimizationLevel: 7
+              },
+              gifsicle: {
+                interlaced: false
+              },
+              pngquant: {
+                quality: [0.65, 0.90],
+                speed: 4
+              }
+            }
+          }
+        ]
+      }
     ]
   },
+  optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin(),
+    ],
+  },
   plugins: [
-    new ExtractTextPlugin('styles.css', {
-      allChunks: true
-    }),
-    new webpack.optimize.UglifyJsPlugin(),
-    new webpack.optimize.DedupePlugin(),
-    new webpack.optimize.OccurenceOrderPlugin(),
+    new MiniCssExtractPlugin()
   ]
 }

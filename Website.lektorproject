@@ -4,6 +4,6 @@ url = https://www.florian-schulze.net
 url_style = absolute
 
 [packages]
-lektor-webpack-support = 0.1
-lektor-atom = 0.1
-lektor-rst = 0.2.0
+lektor-webpack-support = 0.6.0
+lektor-atom = 0.4.0
+lektor-rst = 0.3.0
